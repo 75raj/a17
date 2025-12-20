@@ -1,427 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raj | A Heartfelt Thank You</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0a0e1a;
-            --text: #e2e8f0;
-            --accent: #00d4aa;
-            --love: #ff4d94;
-            --highlight: #c084fc;
-            --card: #141824;
-            --border: #00ffea;
-            --gradient-primary: linear-gradient(135deg, #c084fc, #00ffea);
-            --gradient-secondary: linear-gradient(135deg, #ff4d94, #c084fc);
-        }
-        [data-theme="light"] {
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --accent: #00b894;
-            --love: #e91e63;
-            --highlight: #9333ea;
-            --card: #ffffff;
-            --border: #9333ea;
-            --gradient-primary: linear-gradient(135deg, #9333ea, #00b894);
-            --gradient-secondary: linear-gradient(135deg, #e91e63, #9333ea);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden; 
-            line-height: 1.8; 
-            transition: background 0.5s, color 0.5s;
-        }
-        
-        #progress-bar { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 0%; 
-            height: 6px; 
-            background: var(--accent); 
-            z-index: 1000; 
-            transition: width 0.3s ease; 
-            box-shadow: 0 0 15px var(--accent); 
-        }
-
-        header { 
-            position: fixed; 
-            width: 100%; 
-            padding: 25px 60px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            z-index: 1000; 
-            transition: all 0.4s ease; 
-        }
-        header.scrolled { 
-            background: rgba(10, 14, 26, 0.92); 
-            backdrop-filter: blur(20px); 
-            padding: 18px 60px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        header h2 { 
-            font-size: 1.8rem; 
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
-        nav a { 
-            color: var(--text); 
-            margin: 0 25px; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 1.1rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -6px;
-            left: 0;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-        nav a:hover { color: var(--accent); }
-        nav a:hover::after { width: 100%; }
-        .theme-toggle { 
-            background: var(--card); 
-            padding: 14px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            font-size: 1.6rem; 
-            box-shadow: 0 0 20px rgba(0,255,234,0.25); 
-            transition: all 0.3s;
-        }
-        .theme-toggle:hover { transform: scale(1.1); }
-
-        #hero { 
-            height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            position: relative; 
-            text-align: center; 
-            overflow: hidden;
-        }
-        #particles { 
-            position: absolute; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-        }
-        .hero-content { 
-            max-width: 900px; 
-            padding: 0 20px; 
-            z-index: 2;
-        }
-        .hero-content h1 { 
-            font-size: 5.5rem; 
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            margin-bottom: 25px; 
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .hero-content p { 
-            font-size: 2.4rem; 
-            color: var(--love); 
-            font-weight: 600; 
-        }
-        .highlight-word { 
-            color: var(--love); 
-            font-weight: 700; 
-            font-size: 1.15em; 
-            text-shadow: 0 0 12px rgba(255,77,148,0.4); 
-        }
-
-        section { padding: 140px 60px; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .section-title { 
-            font-size: 4rem; 
-            text-align: center; 
-            margin-bottom: 80px; 
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            font-weight: 700;
-        }
-
-        .story-section {
-            margin: 50px 0;
-            padding: 45px;
-            background: var(--card);
-            border-radius: 30px;
-            border: 2px solid var(--border);
-            box-shadow: 0 15px 40px rgba(0, 255, 234, 0.15);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .story-section::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .story-section:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 255, 234, 0.25);
-            border-color: var(--love);
-        }
-        .story-section:hover::before { opacity: 1; }
-        
-        .story-title {
-            font-size: 2.4rem;
-            margin-bottom: 25px;
-            color: var(--accent);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        hr {
-            border: none;
-            height: 3px;
-            background: var(--gradient-secondary);
-            margin: 60px 0;
-            border-radius: 50px;
-            opacity: 0.6;
-        }
-        p {
-            font-size: 1.25rem;
-            margin-bottom: 18px;
-            text-align: justify;
-        }
-        strong { color: var(--love); font-weight: 700; }
-        em { color: var(--highlight); font-style: italic; }
-        ul { 
-            margin: 30px 0; 
-            padding-left: 50px; 
-        }
-        li { 
-            margin-bottom: 16px; 
-            font-size: 1.25rem; 
-            position: relative;
-        }
-        li::marker { color: var(--accent); }
-        li strong { color: var(--accent); }
-
-        @media (max-width: 768px) {
-            header { padding: 20px 30px; }
-            header.scrolled { padding: 15px 30px; }
-            nav a { margin: 0 15px; font-size: 1rem; }
-            .hero-content h1 { font-size: 3.8rem; }
-            .hero-content p { font-size: 1.8rem; }
-            .section-title { font-size: 3rem; }
-            section { padding: 100px 30px; }
-            .story-section { padding: 35px; }
-            .story-title { font-size: 2rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .welcome-box {
+      background: #222;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 90%;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    .message {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    button {
+      padding: 15px 40px;
+      margin: 10px;
+      font-size: 1.2rem;
+      background: #333;
+      color: #fff;
+      border: 2px solid #555;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    button:hover {
+      background: #444;
+      border-color: #777;
+      transform: scale(1.05);
+    }
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .loading-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .loading-text {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body data-theme="dark">
-    <div id="progress-bar"></div>
-    
-    <header>
-        <h2>Rj</h2>
-        <nav>
-            <a href="#hero">Home</a>
-            <a href="#story">My Story</a>
-        </nav>
-        <div class="theme-toggle" onclick="toggleTheme()">Moon Icon</div>
-    </header>
-    
-    <section id="hero">
-        <canvas id="particles"></canvas>
-        <div class="hero-content" data-aos="zoom-in">
-            <h1>A Heartfelt Thank You</h1>
-            <p>To My <span class="highlight-word">Unknown Lucky Girl</span></p>
-        </div>
-    </section>
-    
-    <section id="story">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">My Complete Story For You</h2>
+<body>
+  <div class="welcome-box">
+    <h1>sorry for today </h1>
+    <div class="message">
+      I’m not ready for that. If you say yes, I understand your time is important.<br><br>
+      So, instead of sending a text, I will use AI to make a voice message — this will save your time too.<br><br>
+      You can check it at these times:<br>
+      <strong>Tomorrow (21-12-2025):</strong><br>
+      Morning – 5:00 AM<br>
+      Afternoon – 3:45 PM<br>
+      Evening – 6:00 PM<br><br>
+      If not, please check at the same times on these dates:<br>
+      22-12-2025, 23-12-2025, and 24-12-2025.<br><br>
+      You can also click at the bottom to see the message I wrote on 17-12-2025.
+    </div>
+    <button onclick="openMain()">OPEN VOICE MESSAGE</button>
+    <button onclick="openLast()">SEE WRITTEN MESSAGE</button>
+  </div>
 
-            <!-- Starting Note -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="story-title">Starting Note</h3>
-                <p>Look buddy,<br>
-                I never lie (or very rarely), but here I’m not lying at all.<br>
-                Look yaar, I don’t know if this word comes again and again, so please don’t get irritated — it’s just my habit to say this.<br>
-                “Jii… look yaar…”<br>
-                If you think I’m saying this to look cool in front of you, that’s not true.<br>
-                To prove, I have attached my client’s chat history below (not friend, because I am a boy — we usually talk with more slang in friends’ chats).</p>
-            </div>
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-text">Loading...</div>
+  </div>
 
-            <!-- Heartfelt Thank You -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="story-title">Heartfelt Thank You</h3>
-                <p>So now I just need one last help from you.<br>
-                But before that, I want to say thank you — yaar, thanks from my heart for your helping.<br>
-                Look, I don’t talk to anyone quickly, and I don’t trust easily.<br>
-                So please, don’t tell this to your best friend or close friends.</p>
-            </div>
+  <script>
+    function openMain() {
+      document.getElementById('loadingOverlay').classList.add('active');
+      document.querySelector('.loading-text').textContent = 'Opening Voice Message...';
+      setTimeout(() => {
+        window.location.href = 'https://75raj.github.io/757/';
+      }, 1500);
+    }
 
-            <!-- Starting Story -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="300">
-                <h3 class="story-title">Starting Story</h3>
-                <p>Look yaar, I had never seen you before 2 August.<br>
-                I talked to you for the first time on 18 October.<br>
-                After that, my last 6 months of distraction ended.<br>
-                (I only asked you — “yes or no.”)<br>
-                After talking to you and you talked so nicely, thanks for that too.<br>
-                Since then, my life is just happiness, happiness, happiness.</p>
-            </div>
-
-            <!-- Distraction & Turning Point -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="400">
-                <h3 class="story-title">Distraction & Turning Point</h3>
-                <p>Before, I had planned to go to Delhi or Patna.<br>
-                On 16 August, I went to Patna, saw rooms and coaching.<br>
-                But after talking to you, my distraction ended in just 6 days.<br>
-                At that time, I wrote this line — I thought I would say it face to face,<br>
-                “Thanks for your helping.<br>
-                After talking to you for 6 minutes, my 7-month distraction,<br>
-                5 days of coding, and 4 seconds later… everything deleted.”</p>
-            </div>
-
-            <!-- About Following -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="500">
-                <h3 class="story-title">About Following</h3>
-                <p>Look yaar, I have never followed you.<br>
-                Since talking to you, I only checked once when I needed help — that day 18 Oct.<br>
-                Total only 5 times, I went when you were out purposely.<br>
-                Whatever happened besides that was accidental.<br>
-                Don’t worry — I have made my master plan for 2026.<br>
-                If I ever disturbed you, I’m sorry.</p>
-            </div>
-
-            <!-- Lucky Girl -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="600">
-                <h3 class="story-title">You Are Just an <span class="highlight-word">Unknown Lucky Girl</span> (For Me)</h3>
-                <p>Now yaar,<br>
-                You are really an unknown lucky girl for me (I NEVER LIE).<br>
-                Why you are lucky for me:</p>
-                <ul>
-                    <li>My 7-month distraction ended in 7 days.</li>
-                    <li>I was really irritated, I was overthinking a lot.</li>
-                    <li>Now I have started earning money.</li>
-                    <li>Life that I was overthinking about is now going very well.</li>
-                </ul>
-                <p>That’s why I wanted to thank you in detail.<br>
-                Saturday was my best day — planned to say.<br>
-                If I didn’t say today, I would have said on 27 Dec 2025.</p>
-            </div>
-
-            <!-- About Your Name -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="700">
-                <h3 class="story-title">About Your Name</h3>
-                <p>What can I say yaar —<br>
-                I thought your name starts with S, but in dream I realized it starts with M.<br>
-                So don’t worry — you are just an unknown lucky girl for me, nothing more.<br>
-                I stay busy in my own world and always think positively.<br>
-                Please don’t misunderstand my intentions.</p>
-            </div>
-
-            <!-- Study & Help -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="800">
-                <h3 class="story-title">Study & Help</h3>
-                <p>After seeing you, I also started studying at 7 PM,<br>
-                so thanks because I needed your help — nothing more.<br>
-                I don’t talk to anyone at home without reason,<br>
-                so thanks again.</p>
-            </div>
-
-            <!-- Experiment -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="900">
-                <h3 class="story-title">Experiment & Luck</h3>
-                <p>I’m telling you all this because I’m doing an experiment on myself —<br>
-                to check if you really are a lucky girl for me.<br>
-                Whenever I share success with friends, next day things go down.<br>
-                I just want to check if staying silent keeps success safe.</p>
-            </div>
-
-            <!-- Final Thank You -->
-            <div class="story-section" data-aos="fade-up" data-aos-delay="1000">
-                <h3 class="story-title">Final Part: My Last Thank You</h3>
-                <p>You are really an unknown lucky girl for me.<br>
-                I never lie, this is all truth.<br>
-                Now what I need from you:<br>
-                Look yaar,<br>
-                I can do this work myself — I’m so smart.<br>
-                But I just wanted to thank you one last time,<br>
-                and talk to you once.<br>
-                I will do that on 27-12-2025 — that will be my last date.<br>
-                After that, I will never disturb you.<br>
-                It’s my promise to you.<br>
-                Just reply on 27-12, I will mention time and date — only 27th.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script>
-        AOS.init({ duration: 1200, once: false });
-
-        function toggleTheme() {
-            const currentTheme = document.body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', newTheme);
-            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? 'Moon Icon' : 'Sun Icon';
-        }
-
-        particlesJS('particles', {
-            particles: { 
-                number: { value: 120, density: { enable: true, value_area: 800 } }, 
-                color: { value: ['#00ffea', '#ff4d94', '#c084fc'] }, 
-                shape: { type: 'circle' }, 
-                opacity: { value: 0.7, random: true }, 
-                size: { value: 4, random: true }, 
-                line_linked: { enable: true, distance: 150, color: '#c084fc', opacity: 0.4, width: 1 }, 
-                move: { enable: true, speed: 3, direction: 'none', random: false, straight: false } 
-            },
-            interactivity: { 
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-                modes: { repulse: { distance: 100, duration: 0.4 } }
-            },
-            retina_detect: true
-        });
-
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + '%';
-            
-            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    function openLast() {
+      document.getElementById('loadingOverlay').classList.add('active');
+      document.querySelector('.loading-text').textContent = 'Opening Written Message...';
+      setTimeout(() => {
+        window.location.href = 'https://75rishi.github.io/7/';
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
