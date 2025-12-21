@@ -1,118 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Girl Message</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
     body {
-      background: #000;
-      color: #fff;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f0f4f8, #dbeafe);
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        animation: bgGradient 15s ease infinite;
     }
-    .welcome-box {
-      background: #222;
-      padding: 40px;
-      border-radius: 15px;
-      max-width: 800px;
-      width: 90%;
+    
+    @keyframes bgGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
+    
+    .container {
+        max-width: 850px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
     }
-    .message {
-      font-size: 1.3rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
+    
+    .summary {
+        font-size: 1.4em;
+        margin-bottom: 25px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: 700;
+        background: linear-gradient(45deg, #2563eb, #3b82f6);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+        transition: all 0.4s ease;
+        animation: pulse 2s infinite;
     }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); }
+        50% { box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5); }
+        100% { box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3); }
+    }
+    
+    .summary:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(45deg, #1e40af, #2563eb);
+    }
+    
+    .message-box {
+        display: none;
+        padding: 30px;
+        border-radius: 15px;
+        background: linear-gradient(to bottom right, #fefce8, #fef9c3);
+        border: 3px solid #facc15;
+        margin-top: 15px;
+        line-height: 1.8;
+        font-size: 1.1em;
+        position: relative;
+        overflow: hidden;
+        animation: fadeIn 0.8s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .message-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(250, 204, 21, 0.1) 0%, transparent 70%);
+        animation: shine 8s linear infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        100% { transform: translate(50%, 50%) rotate(360deg); }
+    }
+    
+    .switch-buttons {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
     button {
-      padding: 15px 40px;
-      margin: 10px;
-      font-size: 1.2rem;
-      background: #333;
-      color: #fff;
-      border: 2px solid #555;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s;
+        background: linear-gradient(45deg, #2563eb, #3b82f6);
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        border-radius: 50px;
+        margin: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
     }
+    
     button:hover {
-      background: #444;
-      border-color: #777;
-      transform: scale(1.05);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        background: linear-gradient(45deg, #1e40af, #2563eb);
     }
-    .loading-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s, visibility 0.5s;
+    
+    button:active {
+        transform: translateY(1px);
     }
-    .loading-overlay.active {
-      opacity: 1;
-      visibility: visible;
+    
+    /* Animated Color Highlights */
+    .important1 { color: #d97706; font-weight: bold; animation: glow1 3s infinite alternate; }
+    .important2 { color: #dc2626; font-weight: bold; animation: glow2 3s infinite alternate; }
+    .important3 { color: #1d4ed8; font-weight: bold; animation: glow3 3s infinite alternate; }
+    .important4 { color: #047857; font-weight: bold; animation: glow4 3s infinite alternate; }
+    .important5 { color: #9333ea; font-weight: bold; animation: glow5 3s infinite alternate; }
+    .important6 { color: #b91c1c; font-weight: bold; animation: glow6 3s infinite alternate; }
+    .important7 { color: #0d9488; font-weight: bold; animation: glow7 3s infinite alternate; }
+    .important8 { color: #c2410c; font-weight: bold; animation: glow8 3s infinite alternate; }
+    .important9 { color: #166534; font-weight: bold; animation: glow9 3s infinite alternate; }
+    .important10 { color: #e11d48; font-weight: bold; animation: glow10 3s infinite alternate; }
+    
+    @keyframes glow1 { from { text-shadow: 0 0 5px #d97706; } to { text-shadow: 0 0 15px #d97706; } }
+    @keyframes glow2 { from { text-shadow: 0 0 5px #dc2626; } to { text-shadow: 0 0 15px #dc2626; } }
+    @keyframes glow3 { from { text-shadow: 0 0 5px #1d4ed8; } to { text-shadow: 0 0 15px #1d4ed8; } }
+    @keyframes glow4 { from { text-shadow: 0 0 5px #047857; } to { text-shadow: 0 0 15px #047857; } }
+    @keyframes glow5 { from { text-shadow: 0 0 5px #9333ea; } to { text-shadow: 0 0 15px #9333ea; } }
+    @keyframes glow6 { from { text-shadow: 0 0 5px #b91c1c; } to { text-shadow: 0 0 15px #b91c1c; } }
+    @keyframes glow7 { from { text-shadow: 0 0 5px #0d9488; } to { text-shadow: 0 0 15px #0d9488; } }
+    @keyframes glow8 { from { text-shadow: 0 0 5px #c2410c; } to { text-shadow: 0 0 15px #c2410c; } }
+    @keyframes glow9 { from { text-shadow: 0 0 5px #166534; } to { text-shadow: 0 0 15px #166534; } }
+    @keyframes glow10 { from { text-shadow: 0 0 5px #e11d48; } to { text-shadow: 0 0 15px #e11d48; } }
+    
+    .flower {
+        font-size: 1.5em;
+        animation: float 4s ease-in-out infinite;
     }
-    .loading-text {
-      font-size: 2rem;
-      margin-top: 20px;
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
     }
-  </style>
+</style>
 </head>
 <body>
-  <div class="welcome-box">
-    <h1>sorry for today </h1>
-    <div class="message">
-      I’m not ready for that. If you say yes, I understand your time is important.<br><br>
-      So, instead of sending a text, I will use AI to make a voice message — this will save your time too.<br><br>
-      You can check it at these times:<br>
-      <strong>Tomorrow (21-12-2025):</strong><br>
-      Morning – 5:00 AM<br>
-      Afternoon – 3:45 PM<br>
-      Evening – 6:00 PM<br><br>
-      If not, please check at the same times on these dates:<br>
-      22-12-2025, 23-12-2025, and 24-12-2025.<br><br>
-      You can also click at the bottom to see the message I wrote on 17-12-2025.
+<div class="container">
+    <div class="summary" onclick="toggleMessage()">✨ Click here to reveal your Summary message ✨</div>
+    
+    <div class="message-box" id="fullMessage">
+        <!-- Language Switch Buttons -->
+        <div class="switch-buttons">
+            <button onclick="showEnglish()">English</button>
+            <button onclick="showHinglish()">Hinglish</button>
+        </div>
+
+        <!-- English Version -->
+        <div id="englishMessage">
+            dear <p></p>
+            I never followed you, but to be honest, <span class="important1">you are a lucky girl for me</span> — because since we started talking, <span class="important2">everything has been going really well</span>.<br><br>
+            I don’t have any <span class="important3">wrong thoughts</span> about you. You’re just an <span class="important4">unknown lucky girl</span>, but since we met, life feels brighter.<br><br>
+            I just wanted to say this, but I can’t <span class="important5">express it face to face</span>.<br><br>
+            I’ve started <span class="important6">e-commerce</span>, <span class="important7">dropshipping</span>, <span class="important8">web development</span>, and <span class="important9">RRB NTPC preparation</span>. These aren’t my dreams — I just wanted to tell you, maybe this too will go well.<br><br>
+            Whenever I start something new, it goes great — but when I tell a friend, it suddenly <span class="important10">goes down</span> (like my YouTube channel).<br><br>
+            But don’t worry — <span class="important4">I’m not blaming you</span>.<br><br>
+            There was one more thing about an <span class="important3">illegal decision</span> — I just wanted your opinion.<br><br>
+            Since we started talking, <span class="important2">everything’s been perfect</span>.<br><br>
+            I just wanted to say <span class="important1">thank you</span> again and again <span class="flower">🌼</span><br><br>
+            I’ll upload the full story and update tomorrow. After reading this once or twice, you’ll understand everything.
+        </div>
+        
+        <!-- Hinglish Version -->
+        <div id="hinglishMessage" style="display:none;">
+            Main kabhi aapko follow nahi karta, lekin sach kahu to <span class="important1">aap mere liye ek lucky girl hain</span> — kyunki jab se baat karni shuru ki hai, <span class="important2">sab kuch best hi ho raha hai mere sath</span>.<br><br>
+            Mere mann mein aapke liye koi <span class="important3">galat soch</span> nahi hai. Aap ek <span class="important4">unknown lucky girl</span> hain, par jab se mile hain, sab kuch accha ho gaya hai.<br><br>
+            Main bas yehi kehna chahta tha, par <span class="important5">face to face bol nahi sakta</span>.<br><br>
+            Abhi main <span class="important6">e-commerce</span>, <span class="important7">dropshipping</span>, <span class="important8">web development</span> aur <span class="important9">RRB NTPC preparation</span> start kiya hai. Ye mere dreams nahi hain, bas aapko batana tha — shayad ye bhi best chale mere sath.<br><br>
+            Jab bhi main kuch naya start karta hoon, sab accha chalta hai, par jaise hi kisi dost ko batata hoon, agle din <span class="important10">downfall</span> aa jata hai (jaise mera YouTube channel).<br><br>
+            Par tension mat lijiye — <span class="important4">main aapko blame nahi kar raha</span>.<br><br>
+            Ek kaam se related <span class="important3">illegal decision</span> lena tha, isliye socha aap se puchh lu.<br><br>
+            Jab se aap se baat hui hai, <span class="important2">sab kuch best ja raha hai</span>.<br><br>
+            Main aapko phir se <span class="important1">thank you</span> kehna chahta tha <span class="flower">🌼</span><br><br>
+            Full story aur kaam ka update main kal upload kar dunga. Ye message 1–2 baar padhne ke baad sab samajh aa jayega.
+        </div>
     </div>
-    <button onclick="openMain()">OPEN VOICE MESSAGE</button>
-    <button onclick="openLast()">SEE WRITTEN MESSAGE</button>
-  </div>
+</div>
 
-  <div id="loadingOverlay" class="loading-overlay">
-    <div class="loading-text">Loading...</div>
-  </div>
-
-  <script>
-    function openMain() {
-      document.getElementById('loadingOverlay').classList.add('active');
-      document.querySelector('.loading-text').textContent = 'Opening Voice Message...';
-      setTimeout(() => {
-        window.location.href = 'https://75raj.github.io/757/';
-      }, 1500);
+<script>
+function toggleMessage() {
+    const box = document.getElementById('fullMessage');
+    if (box.style.display === 'block') {
+        box.style.display = 'none';
+    } else {
+        box.style.display = 'block';
+        // Default to English on open
+        showEnglish();
     }
+}
 
-    function openLast() {
-      document.getElementById('loadingOverlay').classList.add('active');
-      document.querySelector('.loading-text').textContent = 'Opening Written Message...';
-      setTimeout(() => {
-        window.location.href = 'https://75rishi.github.io/7/';
-      }, 1500);
-    }
-  </script>
+function showEnglish() {
+    document.getElementById('englishMessage').style.display = 'block';
+    document.getElementById('hinglishMessage').style.display = 'none';
+}
+
+function showHinglish() {
+    document.getElementById('englishMessage').style.display = 'none';
+    document.getElementById('hinglishMessage').style.display = 'block';
+}
+</script>
 </body>
 </html>
