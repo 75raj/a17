@@ -1,314 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCKY</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(45deg, #98cfff, #f8c6ff, #bfff2b);
-      background-size: 600% 400%;
-      color: #000;
-      padding: 10px;
-      margin: 0;
-      animation: flow 5s ease-in-out infinite;
-      animation-delay: 0.5s;
-    }
-    @keyframes flow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      padding: 40px;
-      border-radius: 25px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      animation: slideUpContainer 1.2s ease-in-out;
-    }
-    @keyframes slideUpContainer {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    h2 {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 30px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      animation: bounceIn 1s ease-in-out;
-    }
-    @keyframes bounceIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-    .caption {
-      text-align: center;
-      font-size: 24px;
-      margin-top: -20px;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #ff0000;
-      animation: colorChange 3s infinite ease-in-out;
-    }
-    @keyframes colorChange {
-      0% { color: rgb(26, 255, 0); text-shadow: 0 0 15px red; }
-      25% { color: rgb(30, 0, 255); text-shadow: 0 0 15px yellow; }
-      50% { color: rgb(255, 0, 43); text-shadow: 0 0 15px pink; }
-      75% { color: rgb(0, 0, 0); text-shadow: 0 0 15px skyblue; }
-      100% { color: rgb(132, 255, 0); text-shadow: 0 0 15px red; }
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 20px 0;
-      justify-items: center;
-    }
-    .box {
-      background: linear-gradient(45deg, #ff6b6b, #ffe066, #40c4ff, #7b1fa2);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      border: 4px solid rgba(0, 0, 0, 0.3);
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      width: 100%;
-      max-width: 200px; /* Ensure uniform size */
-      display: inline-block; /* Fit content while maintaining uniformity */
-    }
-    @keyframes hueRotate {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-    @keyframes floatUpDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    .box::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        -45deg,
-        rgba(112, 201, 239, 0.15),
-        rgba(11, 19, 243, 0.181),
-        rgb(0, 0, 0)
-      );
-      animation: waveLine 6s ease-in-out infinite;
-      transform: rotate(45deg);
-      z-index: 0;
-      filter: drop-shadow(0 0 6px rgb(225, 255, 0));
-    }
-    @keyframes waveLine {
-      0% { transform: rotate(45deg) translateX(120%) scale(0.85); opacity: 0.35; }
-      25% { transform: rotate(45deg) translateX(60%) scale(1); opacity: 0.65; }
-      50% { transform: rotate(45deg) translateX(-60%) scale(1.25); opacity: 1; }
-      75% { transform: rotate(25deg) translateX(30%) scale(1); opacity: 0.7; }
-      100% { transform: rotate(45deg) translateX(120%) scale(0.85); opacity: 0.35; }
-    }
-    .box h4 {
-      position: relative;
-      z-index: 1;
-      color: #000000;
-      font-weight: bold;
-      margin: 0;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .box:nth-child(1) {
-      background: linear-gradient(45deg, #0f0f0f, #40f752, #ff5e57, #1dd1a1);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0s, 0s;
-    }
-    .box:nth-child(2) {
-      background: linear-gradient(45deg, #222f3e, #ff9ff3, #48dbfb, #ff6b6b);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.2s, 0s;
-    }
-    .box:nth-child(3) {
-      background: linear-gradient(45deg, #0a3d62, #54a0ff, #f368e0, #feca57);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.4s, 0s;
-    }
-    .box:nth-child(4) {
-      background: linear-gradient(45deg, #1e272e, #ff9f1a, #32ff7e, #18dcff);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.6s, 0s;
-    }
-    .box:nth-child(5) {
-      background: linear-gradient(45deg, #2f3640, #e84118, #0097e6, #9c88ff);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 0.8s, 0s;
-    }
-    .box:nth-child(6) {
-      background: linear-gradient(45deg, #130f40, #feca57, #ff0000, #00a8ff);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1s, 0s;
-    }
-    .box:nth-child(7) {
-      background: linear-gradient(45deg, #0051ff, #ff6b81, #7bed9f, #70a1ff);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.2s, 0s;
-    }
-    .box:nth-child(8) {
-      background: linear-gradient(45deg, #ff4000, #00ff26, #1100ff, #d000ff);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.4s, 0s;
-    }
-    .box:nth-child(9) {
-      background: linear-gradient(45deg, #1e90ff, #ff6347, #00ced1, #ff4500);
-      background-size: 400% 400%;
-      animation: hueRotate 8s linear infinite, floatUpDown 3s ease-in-out infinite;
-      animation-delay: 1.6s, 0s;
-    }
-    .box:hover {
-      transform: scale(1.1); /* 10% zoom on hover */
-      box-shadow:
-        0 0 20px red,
-        0 0 40px yellow,
-        0 0 60px pink,
-        0 0 80px skyblue;
-      filter: brightness(1.3);
-      z-index: 10;
-      transition: all 0.2s ease;
-    }
-    .box h4 {
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .box {
-        padding: 40px;
-      }
-      .box h4 {
-        font-size: 24px;
-      }
-    }
-    @media (max-width: 767px) {
-      .container {
-        padding: 20px;
-      }
-      .grid {
-        grid-template-columns: repeat(2, 1fr); /* Exactly 2 boxes per row */
-        gap: 45px; /* Minimum 2px gap between boxes on mobile */
-      }
-      .box {
-        padding: 20px; /* Reduced padding to make boxes smaller */
-        max-width: 150px; /* Reduced max-width for smaller boxes */
-      }
-      .box h4 {
-        font-size: 20px; /* Smaller font size for mobile */
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thanks Page</title>
+<style>
+  body{
+    margin:0;height:100vh;background:black;color:white;
+    font-family:'Poppins',sans-serif;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;overflow:hidden;
+  }
+  h1,h2{
+    opacity:0;transform:translateY(40px);
+    animation:fadeInUp 1s forwards;
+  }
+  h1{animation-delay:.4s;font-size:3em;color:#00ffcc;}
+  h2{animation-delay:1.3s;font-size:2em;}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+  .buttons{margin-top:30px;opacity:0;animation:fade 1s 2.4s forwards;}
+  @keyframes fade{to{opacity:1;}}
+  button{
+    background:#00ffcc;border:none;color:black;padding:10px 24px;margin:10px;
+    border-radius:10px;font-size:1.05em;cursor:pointer;transition:.3s;
+  }
+  button:hover{background:#00997a;color:white;transform:scale(1.05);}
+  .message-box{
+    display:none;background:black;border:3px solid;
+    border-image:linear-gradient(90deg,#ff00cc,#00ccff,#00ff99,#ffcc00) 1;
+    padding:20px;margin-top:40px;width:85%;max-width:650px;
+    border-radius:15px;text-align:center;font-size:1.05em;
+    animation:glow 2s infinite alternate;
+  }
+  @keyframes glow{from{box-shadow:0 0 10px #00ffff;}to{box-shadow:0 0 25px #ff00ff;}}
+  .past-btn{
+    display:none;margin-top:25px;padding:12px 28px;font-size:1.05em;
+    border-radius:12px;cursor:pointer;
+    border:3px solid;border-image:linear-gradient(90deg,#ff00cc,#00ccff,#00ff99,#ffcc00) 1;
+    background:black;color:white;
+    animation:blink 1.2s infinite alternate;transition:.3s;
+  }
+  .past-btn:hover{transform:scale(1.05);border-image:linear-gradient(90deg,#00ffcc,#ffcc00,#ff00ff,#00ffff) 1;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.5;}}
+  .highlight1{color:#00ffff;} .highlight2{color:#ff00ff;}
+  .highlight3{color:#ffcc00;} .highlight4{color:#00ff99;}
+  .highlight5{color:#ff3366;}
+
+  /* popup */
+  .popup{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.88);backdrop-filter:blur(3px);
+    justify-content:center;align-items:center;z-index:999;
+  }
+  .popup-content{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.05);
+    border-radius:15px;padding:30px;text-align:center;
+    box-shadow:0 0 25px rgba(255,0,0,0.25);
+    animation:pop .6s ease forwards;
+    width: min(420px, 92%);
+  }
+  @keyframes pop{from{transform:scale(0.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .lock{
+    font-size:3em;margin-bottom:12px;color:#ff3333;
+    transition:0.4s;
+  }
+  .unlock{color:#00ff99;transform:rotateY(360deg);}
+  .popup h3{color:#ff3333;margin:8px 0 12px;}
+  .popup input{
+    padding:12px 15px;width:100%;font-size:1rem;
+    border:2px solid #ff3333;border-radius:10px;
+    background:black;color:white;outline:none;
+    box-shadow:0 0 12px rgba(255,51,51,0.18);
+    transition:.3s;
+  }
+  .popup input:focus{box-shadow:0 0 28px rgba(255,51,51,0.35);}
+  .popup .actions{display:flex;gap:10px;margin-top:14px;justify-content:center;align-items:center;}
+  .popup .actions button{flex:1}
+  #error{color:#ff6666;margin-top:10px;display:none;font-weight:600;}
+  .shake{animation:shake 0.35s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+</style>
 </head>
 <body>
-  <div class="container">
-   <h2>Dear... <br>
-  <span class="board">ULGFM</span> <br/>
-</h2>
-<style>
-  .board {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #fff; /* white board */
-    font-weight: bold;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2),
-                0 8px 16px rgba(0,0,0,0.2);
-    transform: perspective(600px) rotateX(5deg);
-    transition: all 0.3s ease-in-out;
-    /* rainbow gradient text with animation */
-    background-image: linear-gradient(90deg,
-      #ff0000,
-      #ff54aa,
-      #ffff00,
-      #002aff,
-      #2bff00,
-      #4b0082,
-      #8b00ff
-    );
-    background-size: 400% 400%;
-    animation: rainbow 5s linear infinite;
-   
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-  }
-  .board:hover {
-    transform: perspective(600px) rotateX(0deg) translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25),
-                0 12px 24px rgba(0,0,0,0.25);
-  }
-  @keyframes rainbow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-</style>
-    <p class="caption"></p>
-    <div class="grid">
-     
-      <div class="box" onclick="clickEffect(this,'#60a5fa', 'https://75rishi.github.io/Empty1/')">
-        <h4>intro</h4>
+  <h1>Thanks</h1>
+  <h2>Are you Muslim?</h2>
+
+  <div class="buttons">
+    <button onclick="closeSite()">QUIT</button>
+    <button onclick="closeSite()">BACK</button>
+    <button onclick="showMessage()">MORE</button>
+  </div>
+
+  <div class="message-box" id="messageBox">
+    <p style="margin:0 0 10px;"><strong>And whenever I talk to you, please don’t interrupt in between,<br>
+    because the moment you start speaking, I forget what I was going to say.</strong></p>
+
+    <p style="margin:12px 0 0;"><strong><span class="highlight1">For Trust</span> — <span class="highlight2">Thank You</span></strong></p>
+    <p style="margin:8px 0 0;">I didn’t ask you what was <span class="highlight3">important</span>,<br>
+    but said everything that wasn’t.</p>
+    <p style="margin:8px 0 8px;">If we ever meet by chance someday, I’ll ask you face to <span class="highlight4">face</span>.<br>
+    Again, one last thanks — <span class="highlight5">bye</span>. 💬</p>
+
+    <button class="past-btn" id="pastBtn" onclick="openPopup()">PAST</button>
+  </div>
+
+  <!-- password popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content" id="popupBox">
+      <div id="lockIcon" class="lock">🔒</div>
+      <h3>Enter Password</h3>
+      <input type="password" id="pw" placeholder="Enter password">
+      <div class="actions">
+        <button onclick="checkPass()">Unlock</button>
+        <button onclick="closePopup()">Cancel</button>
       </div>
-      <div class="box" onclick="clickEffect(this,'#60a5fa', 'https://75rishi.github.io/Empty2/')">
-        <h4>personal thx</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#34d399', 'https://75rishi.github.io/Empty3/')">
-        <h4>work</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#facc15', 'https://75rishi.github.io/Empty4/')">
-        <h4>why you</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#fb7185', 'https://75rishi.github.io/Empty6/')">
-        <h4>time waste 25-12-25</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#fbbf24', 'https://75raj.github.io/workk/')">
-        <h4> 23-12-2025</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#22d3ee', 'https://75rishi.github.io/Empty8/')">
-        <h4>about</h4>
-      </div>
-      <div class="box" onclick="clickEffect(this,'#22d3ee', 'https://75rishi.github.io/Empty9/')">
-        <h4>31-dec</h4>
-      </div>
+      <div id="error">❌ Wrong password, try again.</div>
     </div>
   </div>
-  <script>
-    function clickEffect(el, color, url){
-      const original = el.style.background;
-      el.style.background = color;
-      setTimeout(() => {
-        window.open(url, '_blank');
-        el.style.background = original;
-      }, 800);
+
+<script>
+  // Show message area + PAST
+  function showMessage(){
+    const box=document.getElementById('messageBox');
+    const past=document.getElementById('pastBtn');
+    box.style.display='block';
+    past.style.display='inline-block';
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  }
+
+  // Close attempts: multiple fallbacks to maximize chance of closing
+  function closeSite(){
+    try {
+      // 1) Try standard close
+      window.close();
+    } catch(e){}
+    try {
+      // 2) Try self-close by replacing with blank then closing
+      window.open('','_self');
+      window.close();
+    } catch(e){}
+    try {
+      // 3) As another fallback, navigate away to about:blank and then try close
+      location.href = 'about:blank';
+      setTimeout(()=>{ try{ window.close(); }catch(e){} }, 300);
+    } catch(e){}
+    // 4) As final fallback, remove page content to simulate closed state
+    document.documentElement.innerHTML = '<div style="background:black;color:white;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;">Goodbye 👋</div>';
+  }
+
+  // Popup open/close
+  function openPopup(){
+    document.getElementById('popup').style.display='flex';
+    document.getElementById('pw').value = '';
+    document.getElementById('pw').focus();
+    document.getElementById('lockIcon').textContent = '🔒';
+    document.getElementById('lockIcon').classList.remove('unlock');
+  }
+  function closePopup(){
+    document.getElementById('popup').style.display='none';
+  }
+
+  // Password check + unlock animation + open link
+  function checkPass(){
+    const p = document.getElementById('pw').value.trim();
+    const err = document.getElementById('error');
+    const lock = document.getElementById('lockIcon');
+    const box = document.getElementById('popupBox');
+    const valid = ["75","lucky","Lucky"];
+
+    if(valid.includes(p)){
+      err.style.display = 'none';
+      lock.textContent = '🔓';
+      lock.classList.add('unlock');
+      // small success pulse
+      lock.style.transition = 'transform .6s ease, color .6s ease';
+      setTimeout(()=>{
+        // close popup visually
+        document.getElementById('popup').style.display='none';
+        // open the target link in a new tab
+        window.open("https://75raj.github.io/chl/","_blank");
+      }, 700);
+    } else {
+      // show error + shake
+      err.style.display = 'block';
+      box.classList.add('shake');
+      setTimeout(()=>{ box.classList.remove('shake'); }, 350);
+      setTimeout(()=>{ err.style.display = 'none'; }, 1800);
+      document.getElementById('pw').value = '';
+      document.getElementById('pw').focus();
     }
-  </script>
+  }
+
+  // keyboard: Enter to submit, Esc to cancel
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      const pop = document.getElementById('popup');
+      if(pop.style.display === 'flex') checkPass();
+    }
+    if(e.key === 'Escape'){
+      const pop = document.getElementById('popup');
+      if(pop.style.display === 'flex') closePopup();
+    }
+  });
+</script>
 </body>
 </html>
